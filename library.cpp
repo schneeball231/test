@@ -11,8 +11,10 @@ bool __stdcall DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved) {
         while (!GetAsyncKeyState(VK_END)) {
         }
 
-        FreeLibrary(instance);
-    } else if (reason == DLL_PROCESS_DETACH) {
+        FreeLibraryAndExitThread(instance, 0);
+    }
+
+    if (reason == DLL_PROCESS_DETACH) {
         fclose(p_file);
         FreeConsole();
     }
